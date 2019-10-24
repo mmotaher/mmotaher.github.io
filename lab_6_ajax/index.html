@@ -16,7 +16,8 @@
     </div>
   </div>
   <script>
-    function loadData(){
+
+    function getRndInteger( min, max) {
       return Math.floor(math.random() * (max - min + 1)) + min;
     }
     function loadData() {
@@ -24,12 +25,14 @@
         .then(res => res.json())
         .then(data => data.map(c => c.code))
         .then(data => {
-          str = "<o>"
-           for (let x = 0; x<15; x+=1{
-             y = getRndInteger(0, 242);
-             str += "<li>" + data[y] + <"</li>";
-              document.querySelector(".content").innerText = data);
-           });
+          str = "<ol>"
+          for (let x = 0; x < 15; x += 1) {
+            y = getRndInteger(0, 242);
+            str += "<li>" + data[y] +  "</li>";
+          }
+          srt += "</ol>";
+            document.querySelector(".content").innerText = str;
+    });
             
     }
   </script>
