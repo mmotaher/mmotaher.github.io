@@ -19,20 +19,28 @@
     function loadData() {
       fetch('https://api.umd.io/v0/bus/routes')
         .then(res => res.json())
-        .then(res => {
-          // you can now work in this area
+        .then(res => res.map(res => [res.route_id, res.title])) 
+        .then(res=> {
+          document.querySelector(".content").innerText = res;
+          const target = document.querySelector(".content");
+          target.innerHTML = "";
 
-          console.log(res);
+          const arg = document.querySelector(".header");
+          arg.innerHTML = "";
 
+          // Second route 105
+          arg.innerText = " UMD Bus route number" +  " " + res[1];
 
+          for (let a= 0; a< res.length; a++) {
+            const selectNumber = a;
+            let el = document.createElement("li");
+            el.innerText = res[selectNumber];
+            target.appendChild(el);
+          }
           return res;
-        })
-
-        .then(data => document.querySelector(".content").innerText = data)
-        .then(data => (document.querySelector('.content').innerText = data))
+        }); 
     }
-
-  </script>
+  </script> 
 </body>
 
 </html>
