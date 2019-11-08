@@ -7,15 +7,16 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="wrapper">
-      <div class="header">API Loader</div>
-      <button class="button" onclick="loadData()">Load Some JSON from a server</button>
-      <div class="content"></div>
-      <div class="footer"></div>
+    <div class="container">
+        <div class="wrapper">
+            <div class="header">API Loader</div>
+            <button class="button" onclick="loadData()">Load Some JSON from a server</button>
+            <div class="content"></div>
+            <div class="footer"></div>
     </div>
   </div>
   <script>
+    //some code was provided by the professor 
     function loadData() {
       console.log('fetch'); // confirm code is running on click
       fetch('/api')
@@ -24,8 +25,20 @@
           console.log(res); // logging step to check what we got
           return res;
         })
-        .then(res => res.data.map(c => c.route_id))
-        .then(codes => document.querySelector(".content").innerText = codes);
+        .then(res => res.data.filter(c => c.dept_id === 'INST'))
+        .then(res => res.map(c => [c.course_id + " " + c.name]))
+        .then(codes => document.querySelector(".content").innerText = codes)
+
+      const write = document.querySelector(".content");
+      write.innerHTML = "";
+
+
+      for (let a = 0; a < codes.length; a++) {
+        const selectNumber = a;
+        let el = document.createElement("ol");
+        el.innerText = codes[selectNumber];
+        write.appendChild(el);
+      }
     }
   </script>
 </body>
